@@ -59,6 +59,7 @@ module.exports = {
         "tailwindcss/classnames-order": 2,
         "tailwindcss/no-custom-classname": 0,
         "tailwindcss/no-contradicting-classname": 0,
+        "react/jsx-one-expression-per-line": ["error", { "allow": "single-child" }]
       },
       parserOptions: {
         ecmaVersion: 2018,
