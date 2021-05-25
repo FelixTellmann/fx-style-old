@@ -1,0 +1,8 @@
+{
+  "name": "kitchen",
+  "version": "1.0.0",
+  "devDependencies": {
+    "typescript": "^4.0.3",
+    "gts": "file:../gts.tgz"
+  }
+}

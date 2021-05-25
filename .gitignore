@@ -1,0 +1,12 @@
+.DS_Store
+.nyc_output
+.vscode
+build
+coverage
+node_modules
+npm-debug.log
+yarn-error.log
+yarn.lock
+__pycache__
+.idea
+.env
