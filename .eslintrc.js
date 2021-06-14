@@ -5,7 +5,7 @@ module.exports = {
     "prettier",
     "plugin:react-hooks/recommended",
   ],
-  plugins: ["node", "prettier-fx", "react-hooks", "eslint-plugin-react", "typescript-sort-keys", "tailwindcss"],
+  plugins: ["node", "prettier-fx", "react-hooks", "eslint-plugin-react", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
   rules: {
     "prettier-fx/prettier": "error",
     "block-scoped-var": "error",
@@ -16,8 +16,8 @@ module.exports = {
     "prefer-arrow-callback": "error",
     "no-trailing-spaces": "error",
     "quotes": ["warn", "double", { avoidEscape: true }],
-    "no-restricted-properties": ["error", { object: "describe", property: "only" }, { object: "it", property: "only" },
-    ],
+    "no-restricted-properties": ["error", { object: "describe", property: "only" }, { object: "it", property: "only" }],
+    "sort-keys-fix/sort-keys-fix": "error"
   },
   overrides: [
     {

@@ -54,6 +54,7 @@
     "eslint-plugin-prettier-fx": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.1",
     "eslint-plugin-tailwindcss": "^1.8.0",
     "eslint-plugin-typescript-sort-keys": "^1.6.0",
     "execa": "^5.0.0",
