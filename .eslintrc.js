@@ -45,7 +45,7 @@ module.exports = {
         "react/jsx-one-expression-per-line": ["error", { "allow": "single-child" }],
         "react/jsx-sort-props": ["error", { callbacksLast: true, ignoreCase: true, reservedFirst: ["key", "ref"], shorthandFirst: true }],
         "require-atomic-updates": "off",
-        "sort-keys-fix/sort-keys-fix": "error",
+        "sort-keys-fix/sort-keys-fix": ["error", "asc"],
         "tailwindcss/classnames-order": 2,
         "tailwindcss/no-contradicting-classname": 0,
         "tailwindcss/no-custom-classname": 0,
