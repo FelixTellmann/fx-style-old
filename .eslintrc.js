@@ -42,6 +42,7 @@ module.exports = {
         "object-curly-spacing": [2, "always", { arraysInObjects: true, objectsInObjects: true }],
         "prefer-template": 1,
         "quotes": [2, "double", { allowTemplateLiterals: true, avoidEscape: true }],
+        "react/display-name": 0,
         "react/jsx-curly-brace-presence": ["error", { children: "never", props: "never" }],
         "react/jsx-one-expression-per-line": ["error", { "allow": "single-child" }],
         "react/jsx-sort-props": ["error", { callbacksLast: true, ignoreCase: true, reservedFirst: ["key", "ref"], shorthandFirst: true }],
