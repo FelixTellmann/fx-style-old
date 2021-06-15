@@ -44,7 +44,7 @@ module.exports = {
         "quotes": [2, "double", { allowTemplateLiterals: true, avoidEscape: true }],
         "react/display-name": 0,
         "react/jsx-curly-brace-presence": ["error", { children: "never", props: "never" }],
-        "react/jsx-one-expression-per-line": ["error", { "allow": "single-child" }],
+        "react/jsx-one-expression-per-line": 0,
         "react/jsx-sort-props": ["error", { callbacksLast: true, ignoreCase: true, reservedFirst: ["key", "ref"], shorthandFirst: true }],
         "require-atomic-updates": "off",
         "sort-keys-fix/sort-keys-fix": ["error", "asc", { "caseSensitive": false, "natural": false }],
@@ -53,6 +53,7 @@ module.exports = {
         "tailwindcss/no-custom-classname": 0,
         "typescript-sort-keys/interface": ["error", "asc", { caseSensitive: true, natural: true, requiredFirst: true }],
         "typescript-sort-keys/string-enum": ["error", "asc", { caseSensitive: true }]
+
       },
     },
   ],
