@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import * as cp from 'child_process';
-import * as fs from 'fs';
-import * as inquirer from 'inquirer';
-import * as path from 'path';
-import {ncp} from 'ncp';
-import * as util from 'util';
+import * as cp from "child_process";
+import * as fs from "fs";
+import * as inquirer from "inquirer";
+import * as path from "path";
+import { ncp } from "ncp";
+import * as util from "util";
 
 import {
   getPkgManagerCommand,
@@ -27,27 +27,27 @@ import {
   writeFileAtomicp as write,
   Bag,
   DefaultPackage,
-} from './util';
+} from "./util";
 
-import {Options} from './cli';
-import {PackageJson} from '@npm/types';
-import chalk = require('chalk');
+import { Options } from "./cli";
+import { PackageJson } from "@npm/types";
+import chalk = require("chalk");
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../../package.json');
+const pkg = require("../../package.json");
 
 const ncpp = util.promisify(ncp);
 
 const DEFAULT_PACKAGE_JSON: PackageJson = {
-  name: '',
-  version: '0.0.0',
-  description: '',
-  main: 'build/src/index.js',
-  types: 'build/src/index.d.ts',
-  files: ['build/src'],
-  license: 'Apache-2.0',
+  description: "",
+  files: ["build/src"],
   keywords: [],
-  scripts: {test: 'echo "Error: no test specified" && exit 1'},
+  license: "Apache-2.0",
+  main: "build/src/index.js",
+  name: "",
+  scripts: { test: 'echo "Error: no test specified" && exit 1' },
+  types: "build/src/index.d.ts",
+  version: "0.0.0",
 };
 
 async function query(
@@ -67,28 +67,25 @@ async function query(
   }
 
   const answers: inquirer.Answers = await inquirer.prompt({
-    type: 'confirm',
-    name: 'query',
-    message: question,
     default: defaultVal,
+    message: question,
+    name: "query",
+    type: "confirm",
   });
   return answers.query;
 }
 
-export async function addScripts(
-  packageJson: PackageJson,
-  options: Options
-): Promise<boolean> {
+export async function addScripts(packageJson: PackageJson, options: Options): Promise<boolean> {
   let edits = false;
   const pkgManager = getPkgManagerCommand(options.yarn);
   const scripts: Bag<string> = {
-    lint: 'gts lint',
-    clean: 'gts clean',
-    compile: 'tsc',
-    fix: 'gts fix',
+    clean: "gts clean",
+    compile: "tsc",
+    fix: "gts fix",
+    lint: "gts lint",
+    posttest: `${pkgManager} run lint`,
     prepare: `${pkgManager} run compile`,
     pretest: `${pkgManager} run compile`,
-    posttest: `${pkgManager} run lint`,
   };
 
   if (!packageJson.scripts) {
@@ -105,7 +102,7 @@ export async function addScripts(
         const message =
           `package.json already has a script for ${chalk.bold(script)}:\n` +
           `-${chalk.red(existing)}\n+${chalk.green(target)}`;
-        install = await query(message, 'Replace', false, options);
+        install = await query(message, "Replace", false, options);
       }
 
       if (install) {
@@ -124,9 +121,9 @@ export async function addDependencies(
 ): Promise<boolean> {
   let edits = false;
   const deps: DefaultPackage = {
+    "@types/node": pkg.devDependencies["@types/node"],
     gts: `^${pkg.version}`,
     typescript: pkg.devDependencies.typescript,
-    '@types/node': pkg.devDependencies['@types/node'],
   };
 
   if (!packageJson.devDependencies) {
@@ -143,7 +140,7 @@ export async function addDependencies(
         const message =
           `Already have devDependency for ${chalk.bold(dep)}:\n` +
           `-${chalk.red(existing)}\n+${chalk.green(target)}`;
-        install = await query(message, 'Overwrite', false, options);
+        install = await query(message, "Overwrite", false, options);
       }
 
       if (install) {
@@ -158,41 +155,34 @@ export async function addDependencies(
 }
 
 function formatJson(object: {}) {
-  const json = JSON.stringify(object, null, '  ');
+  const json = JSON.stringify(object, null, "  ");
   return `${json}\n`;
 }
 
-async function writePackageJson(
-  packageJson: PackageJson,
-  options: Options
-): Promise<void> {
-  options.logger.log('Writing package.json...');
+async function writePackageJson(packageJson: PackageJson, options: Options): Promise<void> {
+  options.logger.log("Writing package.json...");
   if (!options.dryRun) {
-    await write('./package.json', formatJson(packageJson));
+    await write("./package.json", formatJson(packageJson));
   }
   const preview = {
-    scripts: packageJson.scripts,
     devDependencies: packageJson.devDependencies,
+    scripts: packageJson.scripts,
   };
   options.logger.dir(preview);
 }
 
 export const ESLINT_CONFIG = {
-  extends: './node_modules/gts/',
+  extends: "./node_modules/gts/",
 };
 
-export const ESLINT_IGNORE = 'build/\n';
+export const ESLINT_IGNORE = "build/\n";
 
-async function generateConfigFile(
-  options: Options,
-  filename: string,
-  contents: string
-) {
+async function generateConfigFile(options: Options, filename: string, contents: string) {
   let existing;
   try {
-    existing = await read(filename, 'utf8');
+    existing = await read(filename, "utf8");
   } catch (err) {
-    if (err.code === 'ENOENT') {
+    if (err.code === "ENOENT") {
       /* not found, create it. */
     } else {
       throw new Error(`Unknown error reading ${filename}: ${err.message}`);
@@ -204,12 +194,7 @@ async function generateConfigFile(
     options.logger.log(`No edits needed in ${filename}`);
     return;
   } else if (existing) {
-    writeFile = await query(
-      `${chalk.bold(filename)} already exists`,
-      'Overwrite',
-      false,
-      options
-    );
+    writeFile = await query(`${chalk.bold(filename)} already exists`, "Overwrite", false, options);
   }
 
   if (writeFile) {
@@ -222,24 +207,20 @@ async function generateConfigFile(
 }
 
 async function generateESLintConfig(options: Options): Promise<void> {
-  return generateConfigFile(
-    options,
-    './.eslintrc.json',
-    formatJson(ESLINT_CONFIG)
-  );
+  return generateConfigFile(options, "./.eslintrc.json", formatJson(ESLINT_CONFIG));
 }
 
 async function generateESLintIgnore(options: Options): Promise<void> {
-  return generateConfigFile(options, './.eslintignore', ESLINT_IGNORE);
+  return generateConfigFile(options, "./.eslintignore", ESLINT_IGNORE);
 }
 
 async function generateTsConfig(options: Options): Promise<void> {
   const config = formatJson({
-    extends: './node_modules/gts/tsconfig-google.json',
-    compilerOptions: {rootDir: '.', outDir: 'build'},
-    include: ['src/**/*.ts', 'test/**/*.ts'],
+    compilerOptions: { outDir: "build", rootDir: "." },
+    extends: "./node_modules/gts/tsconfig-google.json",
+    include: ["src/**/*.ts", "test/**/*.ts"],
   });
-  return generateConfigFile(options, './tsconfig.json', config);
+  return generateConfigFile(options, "./tsconfig.json", config);
 }
 
 async function generatePrettierConfig(options: Options): Promise<void> {
@@ -247,20 +228,18 @@ async function generatePrettierConfig(options: Options): Promise<void> {
   ...require('gts/.prettierrc.json')
 }
 `;
-  return generateConfigFile(options, './.prettierrc.js', style);
+  return generateConfigFile(options, "./.prettierrc.js", style);
 }
 
-export async function installDefaultTemplate(
-  options: Options
-): Promise<boolean> {
+export async function installDefaultTemplate(options: Options): Promise<boolean> {
   const cwd = process.cwd();
-  const sourceDirName = path.join(__dirname, '../template');
-  const targetDirName = path.join(cwd, 'src');
+  const sourceDirName = path.join(__dirname, "../template");
+  const targetDirName = path.join(cwd, "src");
 
   try {
     fs.mkdirSync(targetDirName);
   } catch (error) {
-    if (error.code !== 'EEXIST') {
+    if (error.code !== "EEXIST") {
       throw error;
     }
     // Else, continue and populate files into the existing directory.
@@ -268,16 +247,15 @@ export async function installDefaultTemplate(
 
   // Only install the template if no ts files exist in target directory.
   const files = fs.readdirSync(targetDirName);
-  const tsFiles = files.filter(file => file.toLowerCase().endsWith('.ts'));
+  const tsFiles = files.filter(file => file.toLowerCase().endsWith(".ts"));
   if (tsFiles.length !== 0) {
     options.logger.log(
-      'Target src directory already has ts files. ' +
-        'Template files not installed.'
+      "Target src directory already has ts files. " + "Template files not installed."
     );
     return false;
   }
   await ncpp(sourceDirName, targetDirName);
-  options.logger.log('Default template installed.');
+  options.logger.log("Default template installed.");
   return true;
 }
 
@@ -285,20 +263,20 @@ export async function init(options: Options): Promise<boolean> {
   let generatedPackageJson = false;
   let packageJson;
   try {
-    packageJson = await readJson('./package.json');
+    packageJson = await readJson("./package.json");
   } catch (err) {
-    if (err.code !== 'ENOENT') {
+    if (err.code !== "ENOENT") {
       throw new Error(`Unable to open package.json file: ${err.message}`);
     }
     const generate = await query(
-      `${chalk.bold('package.json')} does not exist.`,
-      'Generate',
+      `${chalk.bold("package.json")} does not exist.`,
+      "Generate",
       true,
       options
     );
 
     if (!generate) {
-      options.logger.log('Please run from a directory with your package.json.');
+      options.logger.log("Please run from a directory with your package.json.");
       return false;
     }
 
@@ -311,7 +289,7 @@ export async function init(options: Options): Promise<boolean> {
   if (generatedPackageJson || addedDeps || addedScripts) {
     await writePackageJson(packageJson, options);
   } else {
-    options.logger.log('No edits needed in package.json.');
+    options.logger.log("No edits needed in package.json.");
   }
   await generateTsConfig(options);
   await generateESLintConfig(options);
@@ -324,11 +302,9 @@ export async function init(options: Options): Promise<boolean> {
     // --ignore-scripts so that compilation doesn't happen because there's no
     // source files yet.
 
-    cp.spawnSync(
-      getPkgManagerCommand(options.yarn),
-      ['install', '--ignore-scripts'],
-      {stdio: 'inherit'}
-    );
+    cp.spawnSync(getPkgManagerCommand(options.yarn), ["install", "--ignore-scripts"], {
+      stdio: "inherit",
+    });
   }
 
   return true;

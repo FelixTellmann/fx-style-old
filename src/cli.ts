@@ -16,30 +16,30 @@
  * limitations under the License.
  */
 
-import * as path from 'path';
-import * as meow from 'meow';
-import * as updateNotifier from 'update-notifier';
-import {init} from './init';
-import {clean} from './clean';
-import {isYarnUsed} from './util';
-import * as execa from 'execa';
+import * as path from "path";
+import * as meow from "meow";
+import * as updateNotifier from "update-notifier";
+import { init } from "./init";
+import { clean } from "./clean";
+import { isYarnUsed } from "./util";
+import * as execa from "execa";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageJson = require('../../package.json');
+const packageJson = require("../../package.json");
 
 export interface Logger {
-  log: (...args: Array<{}>) => void;
-  error: (...args: Array<{}>) => void;
   dir: (obj: {}, options?: {}) => void;
+  error: (...args: Array<{}>) => void;
+  log: (...args: Array<{}>) => void;
 }
 
 export interface Options {
   dryRun: boolean;
   gtsRootDir: string;
+  logger: Logger;
+  no: boolean;
   targetRootDir: string;
   yes: boolean;
-  no: boolean;
-  logger: Logger;
   yarn?: boolean;
 }
 
@@ -52,6 +52,13 @@ export type VerbFilesFunction = (
 const logger: Logger = console;
 
 const cli = meow({
+  flags: {
+    dryRun: { type: "boolean" },
+    help: { type: "boolean" },
+    no: { alias: "n", type: "boolean" },
+    yarn: { type: "boolean" },
+    yes: { alias: "y", type: "boolean" },
+  },
   help: `
 	Usage
 	  $ gts <verb> [<file>...] [options]
@@ -76,13 +83,6 @@ const cli = meow({
     $ gts fix
     $ gts fix src/file1.ts src/file2.ts
     $ gts clean`,
-  flags: {
-    help: {type: 'boolean'},
-    yes: {type: 'boolean', alias: 'y'},
-    no: {type: 'boolean', alias: 'n'},
-    dryRun: {type: 'boolean'},
-    yarn: {type: 'boolean'},
-  },
 });
 
 /**
@@ -103,7 +103,7 @@ function usage(msg?: string): void {
 
 export async function run(verb: string, files: string[]): Promise<boolean> {
   // throw if running on an old version of nodejs
-  const nodeMajorVersion = Number(getNodeVersion().slice(1).split('.')[0]);
+  const nodeMajorVersion = Number(getNodeVersion().slice(1).split(".")[0]);
   console.log(`version: ${nodeMajorVersion}`);
   if (nodeMajorVersion < 10) {
     throw new Error(
@@ -116,60 +116,50 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
   const options = {
     dryRun: cli.flags.dryRun || false,
     // Paths are relative to the transpiled output files.
-    gtsRootDir: path.resolve(__dirname, '../..'),
-    targetRootDir: process.cwd(),
-    yes: cli.flags.yes || cli.flags.y || false,
-    no: cli.flags.no || cli.flags.n || false,
+    gtsRootDir: path.resolve(__dirname, "../.."),
     logger,
+    no: cli.flags.no || cli.flags.n || false,
+    targetRootDir: process.cwd(),
     yarn: cli.flags.yarn || isYarnUsed(),
+    yes: cli.flags.yes || cli.flags.y || false,
   } as Options;
   // Linting/formatting depend on typescript. We don't want to load the
   // typescript module during init, since it might not exist.
   // See: https://github.com/google/gts/issues/48
-  if (verb === 'init') {
+  if (verb === "init") {
     return init(options);
   }
 
   const flags = Object.assign([], files);
   if (flags.length === 0) {
-    flags.push(
-      '**/*.ts',
-      '**/*.js',
-      '**/*.tsx',
-      '**/*.jsx',
-      '--no-error-on-unmatched-pattern'
-    );
+    flags.push("**/*.ts", "**/*.js", "**/*.tsx", "**/*.jsx", "--no-error-on-unmatched-pattern");
   }
 
   switch (verb) {
-    case 'lint':
-    case 'check': {
+    case "lint":
+    case "check": {
       try {
-        await execa('node', ['./node_modules/eslint/bin/eslint', ...flags], {
-          stdio: 'inherit',
+        await execa("node", ["./node_modules/eslint/bin/eslint", ...flags], {
+          stdio: "inherit",
         });
         return true;
       } catch (e) {
         return false;
       }
     }
-    case 'fix': {
-      const fixFlag = options.dryRun ? '--fix-dry-run' : '--fix';
+    case "fix": {
+      const fixFlag = options.dryRun ? "--fix-dry-run" : "--fix";
       try {
-        await execa(
-          'node',
-          ['./node_modules/eslint/bin/eslint', fixFlag, ...flags],
-          {
-            stdio: 'inherit',
-          }
-        );
+        await execa("node", ["./node_modules/eslint/bin/eslint", fixFlag, ...flags], {
+          stdio: "inherit",
+        });
         return true;
       } catch (e) {
         console.error(e);
         return false;
       }
     }
-    case 'clean':
+    case "clean":
       return clean(options);
     default:
       usage(`Unknown verb: ${verb}`);
@@ -177,7 +167,7 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
   }
 }
 
-updateNotifier({pkg: packageJson}).notify();
+updateNotifier({ pkg: packageJson }).notify();
 
 if (cli.input.length < 1) {
   usage();
