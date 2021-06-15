@@ -1,5 +1,6 @@
 module.exports = {
   extends: [
+    "next",
     "eslint:recommended",
     "plugin:node/recommended",
     "prettier",
@@ -54,7 +55,7 @@ module.exports = {
       },
     },
   ],
-  plugins: ["node", "prettier-fx", "react-hooks", "eslint-plugin-react", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
+  plugins: ["node", "prettier-fx", "react-hooks", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
   rules: {
     "block-scoped-var": "error",
     "eol-last": "error",
