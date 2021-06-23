@@ -1,5 +1,5 @@
 // eslint-disable-next-line node/no-unpublished-require
-const customGroups = require("./tailwindcss-custom-groups").groups;
+const customGroups = require("tailwindcss-custom-groups").groups;
 
 module.exports = {
   extends: [
