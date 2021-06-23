@@ -1,3 +1,6 @@
+// eslint-disable-next-line node/no-unpublished-require
+const customGroups = require("./tailwindcss-custom-groups").groups;
+
 module.exports = {
   extends: [
     "next",
@@ -48,7 +51,13 @@ module.exports = {
         "react/jsx-sort-props": ["error", { callbacksLast: true, ignoreCase: true, reservedFirst: ["key", "ref"], shorthandFirst: true }],
         "require-atomic-updates": "off",
         "sort-keys-fix/sort-keys-fix": ["error", "asc", { "caseSensitive": false, "natural": false }],
-        "tailwindcss/classnames-order": 2,
+        "tailwindcss/classnames-order": [
+          2,
+          {
+            groupByResponsive: true,
+            groups: customGroups,
+          },
+        ],
         "tailwindcss/no-contradicting-classname": 0,
         "tailwindcss/no-custom-classname": 0,
         "typescript-sort-keys/interface": ["error", "asc", { caseSensitive: true, natural: true, requiredFirst: true }],
