@@ -20,7 +20,7 @@
   "scripts": {
     "build": "npm run create:eslint && npm run compile",
     "clean": "rimraf ./build/",
-    "create:eslint": "copyfiles \".eslintrc.js\" \"build/\" && copyfiles \".tailwindcss-custom-groups.js\" \"build/\"",
+    "create:eslint": "copyfiles \".eslintrc.js\" \"build/\" && copyfiles \"tailwindcss-custom-groups.js\" \"build/\"",
     "compile": "tsc",
     "postcompile": "ncp template build/template",
     "lint": "eslint '**/*.ts'",
