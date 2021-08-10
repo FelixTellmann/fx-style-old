@@ -1032,7 +1032,7 @@ module.exports = {
         "react/jsx-one-expression-per-line": 0,
         "react/jsx-sort-props": ["error", { callbacksLast: true, ignoreCase: true, reservedFirst: ["key", "ref"], shorthandFirst: true }],
         "require-atomic-updates": "off",
-        "sort-keys-fix/sort-keys-fix": ["error", "asc", { "caseSensitive": false, "natural": false }],
+        "sort-keys-fix/sort-keys-fix": 0 /*["error", "asc", { "caseSensitive": false, "natural": false }]*/,
         "tailwindcss/classnames-order": [
           2,
           {
