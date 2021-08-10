@@ -1048,7 +1048,7 @@ module.exports = {
       },
     },
   ],
-  plugins: ["node", "prettierx", "react-hooks", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
+  plugins: ["node", "prettier-fx", "react-hooks", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
   rules: {
     "block-scoped-var": "error",
     "eol-last": "error",
@@ -1058,7 +1058,7 @@ module.exports = {
     "no-var": "error",
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
-    "prettierx/options": "error",
+    "prettier-fx/prettier": "error",
     "quotes": ["warn", "double", { avoidEscape: true }],
   },
 };
