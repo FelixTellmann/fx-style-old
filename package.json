@@ -1,6 +1,6 @@
 {
   "name": "fx-style",
-  "version": "1.0.30",
+  "version": "1.0.25",
   "description": "Felix Tellmann TypeScript Style",
   "repository": "FelixTellmann/fx-style",
   "main": "build/src/index.js",
@@ -40,7 +40,7 @@
     "linter",
     "formatter",
     "eslint",
-    "prettierx"
+    "prettier"
   ],
   "author": "Felix Tellmann",
   "license": "MIT",
@@ -54,7 +54,7 @@
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-prettierx": "^0.18.0",
+    "eslint-plugin-prettier-fx": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-sort-keys-fix": "^1.1.1",
@@ -66,7 +66,7 @@
     "meow": "^9.0.0",
     "ncp": "^2.0.0",
     "next": "^11.0.0",
-    "prettierx": "^0.19.0",
+    "prettier-fx": "^2.4.4-dev",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
