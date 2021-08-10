@@ -4,5 +4,6 @@
   "singleQuote": false,
   "bracketSpacing": true,
   "printWidth": 100,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "indentChains": true
 }
