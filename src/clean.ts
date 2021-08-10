@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import chalk = require("chalk");
+// @ts-ignore
 import * as ts from "typescript";
 
 import { Options } from "./cli";
