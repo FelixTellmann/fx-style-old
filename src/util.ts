@@ -155,7 +155,9 @@ export async function getTSConfig(
   rootDir: string,
   customReadFilep?: ReadFileP
 ): Promise<ConfigFile> {
+  // @ts-ignore
   customReadFilep = customReadFilep || readFilep;
   const readArr = new Set<string>();
+  // @ts-ignore
   return getBase("tsconfig.json", customReadFilep, readArr, rootDir);
 }

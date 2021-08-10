@@ -985,6 +985,7 @@ const customGroups = [
 
 module.exports = {
   extends: [
+    "next",
     "eslint:recommended",
     "plugin:node/recommended",
     "prettier",
