@@ -1,10 +1,13 @@
 {
   "trailingComma": "es5",
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "singleQuote": false,
   "bracketSpacing": true,
   "printWidth": 100,
   "endOfLine": "auto",
   "indentChains": true,
-  "breakLongMethodChains": true
+  "breakLongMethodChains": true,
+  "importFormatting": "oneline",
+  "exportCurlySpacing": true,
+  "importCurlySpacing": true
 }
