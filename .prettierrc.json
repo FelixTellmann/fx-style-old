@@ -9,5 +9,6 @@
   "breakLongMethodChains": true,
   "importFormatting": "oneline",
   "exportCurlySpacing": true,
-  "importCurlySpacing": true
+  "importCurlySpacing": true,
+  "allowBreakAfterOperator": false
 }
