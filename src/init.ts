@@ -20,14 +20,7 @@ import * as path from "path";
 import { ncp } from "ncp";
 import * as util from "util";
 
-import {
-  getPkgManagerCommand,
-  readFilep as read,
-  readJsonp as readJson,
-  writeFileAtomicp as write,
-  Bag,
-  DefaultPackage,
-} from "./util";
+import { getPkgManagerCommand, readFilep as read, readJsonp as readJson, writeFileAtomicp as write, Bag, DefaultPackage } from "./util";
 
 import { Options } from "./cli";
 import { PackageJson } from "@npm/types";
@@ -99,9 +92,8 @@ export async function addScripts(packageJson: PackageJson, options: Options): Pr
 
     if (existing !== target) {
       if (existing) {
-        const message =
-          `package.json already has a script for ${chalk.bold(script)}:\n` +
-          `-${chalk.red(existing)}\n+${chalk.green(target)}`;
+        const message = `package.json already has a script for ${chalk.bold(script)}:\n` +
+        `-${chalk.red(existing)}\n+${chalk.green(target)}`;
         install = await query(message, "Replace", false, options);
       }
 
@@ -137,9 +129,8 @@ export async function addDependencies(
 
     if (existing !== target) {
       if (existing) {
-        const message =
-          `Already have devDependency for ${chalk.bold(dep)}:\n` +
-          `-${chalk.red(existing)}\n+${chalk.green(target)}`;
+        const message = `Already have devDependency for ${chalk.bold(dep)}:\n` +
+        `-${chalk.red(existing)}\n+${chalk.green(target)}`;
         install = await query(message, "Overwrite", false, options);
       }
 
@@ -182,9 +173,11 @@ async function generateConfigFile(options: Options, filename: string, contents: 
   try {
     existing = await read(filename, "utf8");
   } catch (err) {
+    // @ts-ignore
     if (err.code === "ENOENT") {
       /* not found, create it. */
     } else {
+      // @ts-ignore
       throw new Error(`Unknown error reading ${filename}: ${err.message}`);
     }
   }
@@ -239,6 +232,7 @@ export async function installDefaultTemplate(options: Options): Promise<boolean>
   try {
     fs.mkdirSync(targetDirName);
   } catch (error) {
+    // @ts-ignore
     if (error.code !== "EEXIST") {
       throw error;
     }
@@ -247,7 +241,7 @@ export async function installDefaultTemplate(options: Options): Promise<boolean>
 
   // Only install the template if no ts files exist in target directory.
   const files = fs.readdirSync(targetDirName);
-  const tsFiles = files.filter(file => file.toLowerCase().endsWith(".ts"));
+  const tsFiles = files.filter((file) => file.toLowerCase().endsWith(".ts"));
   if (tsFiles.length !== 0) {
     options.logger.log(
       "Target src directory already has ts files. " + "Template files not installed."
@@ -265,7 +259,9 @@ export async function init(options: Options): Promise<boolean> {
   try {
     packageJson = await readJson("./package.json");
   } catch (err) {
+    // @ts-ignore
     if (err.code !== "ENOENT") {
+      // @ts-ignore
       throw new Error(`Unable to open package.json file: ${err.message}`);
     }
     const generate = await query(

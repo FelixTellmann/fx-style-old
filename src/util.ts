@@ -82,6 +82,7 @@ async function getBase(
     try {
       contents = JSON5.parse(json);
     } catch (e) {
+      // @ts-ignore
       e.message = `Unable to parse ${filePath}!\n${e.message}`;
       throw e;
     }
@@ -98,6 +99,7 @@ async function getBase(
 
     return contents;
   } catch (err) {
+    // @ts-ignore
     err.message = `Error: ${filePath}\n${err.message}`;
     throw err;
   }
