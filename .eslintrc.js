@@ -1044,11 +1044,10 @@ module.exports = {
         "tailwindcss/no-custom-classname": 0,
         "typescript-sort-keys/interface": ["error", "asc", { caseSensitive: true, natural: true, requiredFirst: true }],
         "typescript-sort-keys/string-enum": ["error", "asc", { caseSensitive: true }]
-
       },
     },
   ],
-  plugins: ["node", "prettier-fx", "react-hooks", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
+  plugins: ["node", "prettier",/*"prettier-fx",*/ "react-hooks", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
   rules: {
     "block-scoped-var": "error",
     "eol-last": "error",
@@ -1058,7 +1057,8 @@ module.exports = {
     "no-var": "error",
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
-    "prettier-fx/prettier": "error",
+    "prettier/prettier": "error",
+    /*"prettier-fx/prettier": "error",*/
     "quotes": ["warn", "double", { avoidEscape: true }],
   },
 };
