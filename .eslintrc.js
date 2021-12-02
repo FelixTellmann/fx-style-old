@@ -988,8 +988,8 @@ module.exports = {
     "next",
     "eslint:recommended",
     "plugin:node/recommended",
-    "prettier",
     "plugin:react-hooks/recommended",
+    "prettier",
   ],
   overrides: [
     {
