@@ -1047,7 +1047,7 @@ module.exports = {
       },
     },
   ],
-  plugins: ["node", "prettier",/*"prettier-fx",*/ "react-hooks", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
+  plugins: ["node", "prettier", /*"prettier-fx",*/ "react-hooks", "typescript-sort-keys", "tailwindcss", "sort-keys-fix"],
   rules: {
     "block-scoped-var": "error",
     "eol-last": "error",
