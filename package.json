@@ -1,6 +1,6 @@
 {
   "name": "fx-style",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Felix Tellmann TypeScript Style",
   "repository": "FelixTellmann/fx-style",
   "main": "build/src/index.js",
@@ -67,7 +67,7 @@
     "ncp": "^2.0.0",
     "next": "^12.0.4",
     "prettier": "^2.5.1",
-    "prettier-fx": "^2.6.2-dev",
+    "prettier-fx": "^2.6.3-dev",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
