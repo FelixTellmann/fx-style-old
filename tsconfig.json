@@ -8,7 +8,6 @@
   "include": [
     "src/**/*.ts",
     "test/**/*.ts",
-    "tailwindcss-custom-groups.js"
   ],
   "exclude": [
     "test/fixtures/**/*.*",
