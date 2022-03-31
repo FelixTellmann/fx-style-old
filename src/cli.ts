@@ -59,7 +59,7 @@ const cli = meow({
     yarn: { type: "boolean" },
     yes: { alias: "y", type: "boolean" },
   },
-  help: `
+  help: ` 
 	Usage
 	  $ gts <verb> [<file>...] [options]
 
@@ -173,7 +173,7 @@ if (cli.input.length < 1) {
   usage();
 }
 
-run(cli.input[0], cli.input.slice(1)).then(success => {
+run(cli.input[0], cli.input.slice(1)).then((success) => {
   if (!success) {
     // eslint-disable-next-line no-process-exit
     process.exit(1);

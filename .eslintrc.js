@@ -988,7 +988,6 @@ module.exports = {
     "next",
     "eslint:recommended",
     "plugin:node/recommended",
-    "plugin:react-hooks/recommended",
     "prettier",
   ],
   overrides: [
@@ -1038,7 +1037,7 @@ module.exports = {
       },
     },
   ],
-  plugins: ["node", /*"prettier",*/ "prettier-fx", "react-hooks", "typescript-sort-keys",  "sort-keys-fix"],
+  plugins: ["node", /*"prettier",*/ "prettier-fx", /*"react-hooks",*/ "typescript-sort-keys",  "sort-keys-fix"],
   rules: {
     "block-scoped-var": "error",
     "eol-last": "error",
