@@ -114,6 +114,7 @@ function combineTSConfig(base: ConfigFile, inherited: ConfigFile): ConfigFile {
   const result: ConfigFile = { compilerOptions: {} };
 
   Object.assign(result, base, inherited);
+  // @ts-ignore
   Object.assign(result.compilerOptions, base.compilerOptions, inherited.compilerOptions);
   delete result.extends;
   return result;
