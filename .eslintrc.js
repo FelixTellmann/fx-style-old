@@ -1031,13 +1031,12 @@ module.exports = {
         "react/jsx-one-expression-per-line": 0,
         "react/jsx-sort-props": ["error", { callbacksLast: true, ignoreCase: true, reservedFirst: ["key", "ref"], shorthandFirst: true }],
         "require-atomic-updates": "off",
-        "sort-keys-fix/sort-keys-fix": 0 /*["error", "asc", { "caseSensitive": false, "natural": false }]*/,
         "typescript-sort-keys/interface": ["error", "asc", { caseSensitive: true, natural: true, requiredFirst: true }],
         "typescript-sort-keys/string-enum": ["error", "asc", { caseSensitive: true }]
       },
     },
   ],
-  plugins: ["node", /*"prettier",*/ "prettier-fx", /*"react-hooks",*/ "typescript-sort-keys",  "sort-keys-fix"],
+  plugins: ["node", /*"prettier",*/ "prettier-fx", /*"react-hooks",*/ "typescript-sort-keys",],
   rules: {
     "block-scoped-var": "error",
     "eol-last": "error",
