@@ -1,6 +1,6 @@
 {
   "name": "fx-style",
-  "version": "2.6.21",
+  "version": "2.0.1",
   "description": "Felix Tellmann TypeScript Style",
   "repository": "FelixTellmann/fx-style",
   "main": "build/src/index.js",
