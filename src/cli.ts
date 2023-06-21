@@ -18,7 +18,7 @@
 
 import * as path from "path";
 import * as meow from "meow";
-import * as updateNotifier from "update-notifier";
+
 import { init } from "./init";
 import { clean } from "./clean";
 import { isYarnUsed } from "./util";
@@ -167,7 +167,7 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
   }
 }
 
-updateNotifier({ pkg: packageJson }).notify();
+// updateNotifier({ pkg: packageJson }).notify();
 
 if (cli.input.length < 1) {
   usage();
