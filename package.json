@@ -1,6 +1,6 @@
 {
   "name": "fx-style",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Felix Tellmann TypeScript Style",
   "repository": "FelixTellmann/fx-style",
   "main": "build/src/index.js",
@@ -44,7 +44,6 @@
   ],
   "author": "Felix Tellmann",
   "license": "MIT",
-
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
